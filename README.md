@@ -39,3 +39,14 @@ Users can dynamically adjust a **Volatility Multiplier** ($0.5\times - 2.0\times
 ---
 
 ## ⚙️ Architecture & Features
+System Workflow
+1.FRED API Data Feed (id = DCOILBRENTEU): Ingests weekly Friday average closing prices directly from Federal Reserve Economic Data with a local CSV backup fallback.
+2.Dynamic Modeling Engine: Log-transforms raw price data to stabilize variance and fits 8-week dynamic forecasts across Naive, ETS, ARIMA, and ARIMA-GARCH models.
+3.Append-Only Forecast Ledger: Records every model run with an immutable timestamp (forecast_log.csv) and calculates live out-of-sample RMSE % and empirical coverage.
+
+Dashboard Features
+Live Forecast: Interactive fan charts displaying point forecasts, dynamic confidence bands (50% to 99%), and user-adjusted volatility scenarios.
+Compare Models: Side-by-side trajectories comparing all four models against actual historical prices.
+Risk Calculator: Interactive probability curve indicating the likelihood of crude crossing specified price thresholds.
+History & Volatility: Historical price series annotated with major structural shock events (1990 Gulf War, 2008 Financial Crisis, 2020 COVID Crash, 2022 Ukraine War) and rolling volatility windows.
+Scoreboard & Detail: Real-time out-of-sample backtest tracker displaying Root Mean Squared Error (RMSE) percentages and empirical coverage rates.
